@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bikes, Boards, and Beyond</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="#top">Bikes, Boards, <span>& Beyond</span></a>
+      <nav>
+        <a href="#photos">Photos</a><a href="#posts">Posts</a
+        ><a href="#comments">Comments</a>
+        <a href="#xss-demo">XSS Lab</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Adventure starts here</p>
+          <h1>Welcome to Bikes, Boards, <em>& Beyond</em></h1>
+          <p class="intro">
+            A simple demonstration site built with HTML, CSS, vanilla
+            JavaScript, and fetch requests.
+          </p>
+          <a class="button" href="#photos">Explore the feed ↓</a>
+        </div>
+      </section>
+
+      <section id="photos" class="content-section">
+        <div class="section-title">
+          <p class="eyebrow">From the photo feed</p>
+          <h2>See the adventure.</h2>
+        </div>
+        <div id="photo-list" class="photo-grid">
+          <p class="loading">Loading photos…</p>
+        </div>
+      </section>
+      <section id="posts" class="content-section tinted">
+        <div class="section-title">
+          <p class="eyebrow">From the post feed</p>
+          <h2>Read the ride report.</h2>
+        </div>
+        <div id="post-list" class="post-grid">
+          <p class="loading">Loading posts…</p>
+        </div>
+      </section>
+      <section id="comments" class="content-section">
+        <div class="section-title">
+          <p class="eyebrow">From the comment feed</p>
+          <h2>What people are saying.</h2>
+        </div>
+        <div id="comment-list" class="comment-list">
+          <p class="loading">Loading comments…</p>
+        </div>
+      </section>
+
+      <section id="xss-demo" class="content-section tinted">
+        <div class="section-title">
+          <p class="eyebrow">Security lesson</p>
+          <h2>XSS Lab</h2>
+        </div>
+        <p>
+          Enter text below and compare what happens when it is rendered unsafely
+          versus safely.
+        </p>
+        <p>
+          Try:
+          <code
+            >&lt;img src="invalid-image" onerror="
+            document.body.style.backgroundColor = '#ffb3a7'; alert('JavaScript
+            executed through unsafe HTML');"&gt;</code
+          >
+        </p>
+        <textarea
+          id="xss-input"
+          rows="4"
+          cols="50"
+          placeholder="Try: &lt;img src=x onerror=alert('XSS demo')&gt;"
+        ></textarea>
+        <div class="xss-buttons">
+          <button id="unsafe-button" class="button">Unsafe render</button>
+          <button id="safe-button" class="button">Safe render</button>
+        </div>
+        <h3>Unsafe output</h3>
+        <div id="unsafe-output" class="demo-output"></div>
+        <h3>Safe output</h3>
+        <div id="safe-output" class="demo-output"></div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Bikes, Boards, and Beyond</span
+      ><span>Built for learning JavaScript</span>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
