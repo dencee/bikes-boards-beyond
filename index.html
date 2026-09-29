@@ -12,6 +12,7 @@
       <nav>
         <a href="#photos">Photos</a><a href="#posts">Posts</a
         ><a href="#comments">Comments</a>
+        <a href="#login">Login</a>
         <a href="#xss-demo">XSS Lab</a>
       </nav>
     </header>
@@ -19,48 +20,92 @@
     <main id="top">
       <section class="hero">
         <div>
-          <p class="eyebrow">Adventure starts here</p>
           <h1>Welcome to Bikes, Boards, <em>& Beyond</em></h1>
-          <p class="intro">
-            A simple demonstration site built with HTML, CSS, vanilla
-            JavaScript, and fetch requests.
-          </p>
-          <a class="button" href="#photos">Explore the feed ↓</a>
+          <a class="button" href="#photos">Explore more ↓</a>
         </div>
+      </section>
+
+      <section id="login" class="content-section tinted">
+        <div class="section-title">
+          <p class="eyebrow">Account</p>
+          <h2>Login</h2>
+        </div>
+        <form id="login-form" class="upload-form">
+          <input
+            type="text"
+            id="login-username"
+            placeholder="Username"
+            required
+          />
+          <input
+            type="password"
+            id="login-password"
+            placeholder="Password"
+            required
+          />
+          <button type="submit" class="button">Log in</button>
+        </form>
+        <p id="login-status"></p>
+        <pre id="login-debug" class="request-log"></pre>
+
+        <button id="logout-button" class="button" style="display: none">
+          Log out
+        </button>
       </section>
 
       <section id="photos" class="content-section">
         <div class="section-title">
-          <p class="eyebrow">From the photo feed</p>
-          <h2>See the adventure.</h2>
+          <h2>Product Photos</h2>
         </div>
-        <div id="photo-list" class="photo-grid">
-          <p class="loading">Loading photos…</p>
-        </div>
+        <button id="photo-toggle" class="loading">Load photos…</button>
+        <p id="photo-fetch-status"></p>
+        <div id="photo-list" class="photo-grid"></div>
       </section>
       <section id="posts" class="content-section tinted">
         <div class="section-title">
-          <p class="eyebrow">From the post feed</p>
-          <h2>Read the ride report.</h2>
+          <p class="eyebrow">Customer Post Feed</p>
+          <h2>Customer Posts</h2>
         </div>
-        <div id="post-list" class="post-grid">
-          <p class="loading">Loading posts…</p>
-        </div>
+        <button id="post-toggle" class="loading">Load posts…</button>
+        <p id="post-fetch-status"></p>
+        <div id="post-list" class="post-grid"></div>
       </section>
       <section id="comments" class="content-section">
         <div class="section-title">
-          <p class="eyebrow">From the comment feed</p>
-          <h2>What people are saying.</h2>
+          <p class="eyebrow">Customer Comment feed</p>
+          <h2>Comments</h2>
         </div>
-        <div id="comment-list" class="comment-list">
-          <p class="loading">Loading comments…</p>
-        </div>
+        <form id="comment-form" class="upload-form" style="display: none">
+          <input
+            type="text"
+            id="comment-name-input"
+            placeholder="Name"
+            required
+          />
+          <input
+            type="email"
+            id="comment-email-input"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="text"
+            id="comment-body-input"
+            placeholder="Comment"
+            required
+          />
+          <button type="submit" class="button">Post comment</button>
+        </form>
+        <p id="comment-status"></p>
+        <button id="comment-toggle" class="loading">Load comments…</button>
+        <p id="comment-fetch-status"></p>
+        <div id="comment-list" class="comment-list"></div>
       </section>
 
       <section id="xss-demo" class="content-section tinted">
         <div class="section-title">
-          <p class="eyebrow">Security lesson</p>
-          <h2>XSS Lab</h2>
+          <p class="eyebrow">Cybersecurity</p>
+          <h2>XSS Demo</h2>
         </div>
         <p>
           Enter text below and compare what happens when it is rendered unsafely
@@ -93,8 +138,9 @@
 
     <footer>
       <span>Bikes, Boards, and Beyond</span
-      ><span>Built for learning JavaScript</span>
+      ><span>Cybersecurity 2026</span>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
   </body>
 </html>

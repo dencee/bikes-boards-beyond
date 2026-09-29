@@ -4,8 +4,25 @@
   --orange: #ed7047;
   --yellow: #f5c84c;
   --mint: #b4d7c1;
+  --dark-green: #2c5f2a;
   --line: #d9d4c8;
+  --navy: #001f3f;
+  --blue: #0074ff;
+  --gray: #f0f4f8;
+
+  /**
+   * 1. Customize your page colors here
+   */
+  --bg-color: var(--cream);
+  --header-bg-color: var(--gray);
+  --h1-color: var(--navy);
+  --h2-color: var(--navy);
+  --h3-color: var(--navy);
+  --button-color: var(--dark-green);
 }
+
+/* ================= NO NEED TO CHANGE THE STYLES BELOW ==================== */
+
 * {
   box-sizing: border-box;
 }
@@ -14,7 +31,7 @@ html {
 }
 body {
   margin: 0;
-  background: var(--cream);
+  background: var(--bg-color);
   color: var(--ink);
   font-family: Arial, sans-serif;
 }
@@ -26,7 +43,7 @@ body {
   border-bottom: 1px solid var(--line);
   position: sticky;
   top: 0;
-  background: rgba(247, 243, 233, 0.95);
+  background: var(--header-bg-color);
   z-index: 2;
 }
 .logo {
@@ -62,6 +79,7 @@ body {
   gap: 50px;
   text-align: center;
   line-height: 1.5;
+  background: var(--bg-color);
 }
 .eyebrow {
   font-size: 11px;
@@ -76,6 +94,7 @@ body {
   line-height: 0.86;
   letter-spacing: -7px;
   margin: 0 0 28px;
+  color: var(--h1-color)
 }
 .hero h1 em {
   color: var(--orange);
@@ -85,18 +104,20 @@ body {
   font-size: 18px;
   line-height: 1.5;
 }
-.button {
+.button,
+button.loading {
   display: inline-block;
   margin-top: 14px;
-  background: var(--ink);
+  background: var(--button-color);
   color: white;
   padding: 14px 19px;
   text-decoration: none;
   border-radius: 3px;
   font-weight: bold;
-}
-.button:hover {
-  background: var(--orange);
+
+  &:hover {
+    background: var(--orange);
+  }
 }
 .hero-shape {
   height: 370px;
@@ -130,42 +151,10 @@ body {
 .wheel-two {
   right: 75px;
 }
-.board {
-  position: absolute;
-  width: 190px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--ink);
-  bottom: 60px;
-  right: 100px;
-  transform: rotate(-16deg);
-}
-.board:before,
-.board:after {
-  content: "";
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  background: var(--yellow);
-  border-radius: 50%;
-  bottom: -13px;
-}
-.board:before {
-  left: 22px;
-}
-.board:after {
-  right: 22px;
-}
 .content-section {
   max-width: 1120px;
   margin: auto;
   padding: 90px 5%;
-}
-.tinted {
-  max-width: none;
-  background: var(--yellow);
-  padding-left: calc((100% - 1000px) / 2);
-  padding-right: calc((100% - 1000px) / 2);
 }
 .section-title {
   margin-bottom: 30px;
@@ -174,6 +163,26 @@ body {
   font-size: 54px;
   letter-spacing: -3px;
   margin: 0;
+  color: var(--h2-color);
+}
+.upload-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.upload-form input[type="text"],
+.upload-form input[type="password"] {
+  flex: 1;
+  min-width: 60px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+#upload-status {
+  font-size: 13px;
+  color: #687269;
+  margin: 0 0 18px;
 }
 .photo-grid {
   display: grid;
@@ -221,7 +230,9 @@ body {
   margin: 0;
 }
 .comment-list {
-  max-width: 800px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
 }
 .comment-card {
   border-top: 1px solid var(--line);
@@ -229,15 +240,24 @@ body {
 }
 .comment-card strong {
   font-size: 14px;
+  color: var(--h3-color);
 }
 .comment-card p {
   margin: 8px 0 0;
   line-height: 1.5;
   color: #4f5a51;
 }
+#xss-demo > .section-title > h2,
+#posts > .section-title > h2 {
+  color: var(--ink);
+}
 .loading {
-  color: #687269;
+  color: var(--ink);
   font-style: italic;
+  background: var(--mint);
+  border: 1px solid var(--ink);
+  padding: 10px;
+  cursor: pointer;
 }
 .error {
   color: #9a321f;
@@ -251,6 +271,25 @@ footer {
   border-top: 1px solid var(--line);
   font-size: 12px;
   color: #687269;
+}
+.fetched {
+  color: var(--blue);
+}
+.request-log {
+  display: none;
+  background: var(--ink);
+  color: var(--mint);
+  padding: 16px;
+  border-radius: 4px;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin: 12px 0;
+}
+.request-log:not(:empty) {
+  display: block;
 }
 @media (max-width: 700px) {
   .site-header {

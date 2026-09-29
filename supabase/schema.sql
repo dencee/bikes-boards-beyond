@@ -1,0 +1,48 @@
+-- Run this in the Supabase SQL editor (Project -> SQL Editor -> New query).
+-- Then create a storage bucket named "photos" under Storage, and mark it public.
+
+CREATE TABLE IF NOT EXISTS photos (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  title TEXT NOT NULL,
+  thumbnail_url TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS posts (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  title TEXT NOT NULL,
+  body TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS comments (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  body TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE photos ENABLE ROW LEVEL SECURITY;
+ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE comments ENABLE ROW LEVEL SECURITY;
+
+-- Read-only for now
+DROP POLICY IF EXISTS "Public read" ON photos;
+CREATE POLICY "Public read" ON photos
+  FOR SELECT USING (TRUE);
+
+DROP POLICY IF EXISTS "Public read" ON posts;
+CREATE POLICY "Public read" ON posts
+  FOR SELECT USING (TRUE);
+
+DROP POLICY IF EXISTS "Public read" ON comments;
+CREATE POLICY "Public read" ON comments
+  FOR SELECT USING (TRUE);
+
+-- RLS policies only apply once a role already has a table-level grant.
+-- Supabase normally sets this up automatically, but grant it explicitly
+-- here too so a missing grant can't silently block the anon key.
+GRANT SELECT ON photos, posts, comments TO anon, authenticated;
+GRANT INSERT ON comments TO anon, authenticated;
+REVOKE INSERT ON photos, posts FROM anon, authenticated;
