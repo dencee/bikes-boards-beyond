@@ -275,7 +275,7 @@ document.querySelector('#comment-form').addEventListener('submit', async (event)
 
     if (error) throw error;
 
-    status.textContent = `/POST request to "${SUPABASE_URL}/rest/v1/comments"`;
+    status.textContent = `HTTP /POST request to "${SUPABASE_URL}/rest/v1/comments"`;
     event.target.reset();
     loadComments();
 
