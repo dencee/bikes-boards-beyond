@@ -1,6 +1,4 @@
--- Run this in the Supabase SQL editor after schema.sql and policy.sql.
--- Safe to re-run: it resets photos/posts/comments to this fixed set each time.
-
+-- Mock Data
 TRUNCATE TABLE photos, posts, comments RESTART IDENTITY;
 
 INSERT INTO photos (title, thumbnail_url) VALUES

@@ -10,11 +10,7 @@ const POSTS_TABLE = 'posts';
 const COMMENTS_TABLE = 'comments';
 
 /**
- * In-memory login only. There's no backend auth involved: the credentials
- * below live in this file, so anyone can read them via view-source or the
- * network tab. This only toggles which form the UI shows -- it grants no
- * real access, which is why the write policies in supabase/policy.sql
- * allow the anon key to insert directly regardless of this flag.
+ * In-memory login only. No security vulnerabilities.
  */
 const VALID_USERNAME = 'rbhs';
 const VALID_PASSWORD = 'password';
@@ -58,18 +54,14 @@ document.querySelector('#logout-button').addEventListener('click', () => {
 });
 
 /**
- * UNSAFE button handler.
- * Setting innerHTML injects code directly to be executed by the browser.
- * Can be exploited for reflected XSS attacks.
+ * UNSAFE button using innerHTML. DOM XSS vulnerability.
  */
 document.querySelector('#unsafe-button').addEventListener('click', () => {
   unsafeOutput.innerHTML = xssInput.value;
 });
 
 /**
- * SAFE button handler.
- * Treats the input as plain text and NOT html code to be executed.
- * Safe from reflected XSS attacks.
+ * SAFE button handler useing textContent to prevent DOM XSS.
  */
 document.querySelector('#safe-button').addEventListener('click', () => {
   safeOutput.textContent = xssInput.value;
@@ -218,6 +210,9 @@ async function loadPosts() {
 async function loadComments() {
   const container = document.querySelector('#comment-list');
   try {
+    /**
+     * Show all the comments students post, no LIMIT.
+     */
     const { data: comments, error } = await supabaseClient
       .from(COMMENTS_TABLE)
       .select('id, name, email, body')
